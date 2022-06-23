@@ -1,0 +1,35 @@
+#자바는 클래스 하나 당 파일 하나. 그리고 대문자로 실행.
+#하지만 파이선은 한 파일에 다 넣을 수 있음
+
+class Animal:
+    '''super class'''
+    def __init__(self):
+        self.age = 1;
+        
+    def aging(self):
+        self.age+=1
+
+ani = Animal()
+print(ani.age)
+
+ani.aging()
+print(ani.age)
+
+
+class Human(Animal):
+    
+    def __init__(self, age, skill_speak):
+        self.age = 1
+        self.skill_speak = 0
+        
+    def momstouch(self, stroke):
+        self.skill_speak += stroke
+    
+hum = Human(1, 0)
+print("나이", hum.age, "언어능력", hum.skill_speak)
+
+hum.momstouch(5)
+print("언어능력", hum.skill_speak, "상승!")
+
+
+

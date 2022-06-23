@@ -9,10 +9,10 @@ arr[0] = arr[1]
 arr[1] = temp
 print("1과 2만 섞은 후 : {}".format(arr))
 
-for i in range(9):
+for i in range(10):
     rnd = int(random()*9)
-    temp = arr[i]
-    arr[i] = arr[rnd]
+    temp = arr[0]
+    arr[0] = arr[rnd]
     arr[rnd] = temp
     
 print("랜덤으로 섞은 후 : {}".format(arr))

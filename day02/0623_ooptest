@@ -19,7 +19,7 @@ print(ani.age)
 class Human(Animal):
     
     def __init__(self, age, skill_speak):
-        self.age = 1
+        super().__init__()
         self.skill_speak = 0
         
     def momstouch(self, stroke):

@@ -30,6 +30,3 @@ print("나이", hum.age, "언어능력", hum.skill_speak)
 
 hum.momstouch(5)
 print("언어능력", hum.skill_speak, "상승!")
-
-
-

@@ -11,3 +11,6 @@ sum = 0
 for i in arr:
     sum += i
 print("{}에서 {}까지의 모든 숫자의 합은 {}입니다.".format(aa, bb, sum))
+
+#혹은
+#for i in range(aa, bb+1)로 써도 됨

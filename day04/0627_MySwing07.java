@@ -1,6 +1,5 @@
 package day04;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 public class MySwing07 extends JFrame {
+	//C++ 등 다른 언어에서도 활용할 수 있는 MyRandom01 방법을 추천. 2번과 3번 방법은 import를 많이 하는 등 해줘야할 것이 많음
 	
 	JLabel lbl1;
 	JLabel lbl2;

@@ -82,7 +82,7 @@ public class MySwing07 extends JFrame {
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lotto();
+				lotto2();
 			}
 		});
 	}
@@ -107,6 +107,7 @@ public class MySwing07 extends JFrame {
 			if(numbers.get(rnd) > 0) {
 				lotto.add(numbers.get(rnd));
 				numbers.set(rnd, -1); //그냥 numbers.add(rnd) = -1로 해도 됨
+				//혹은 다 섞은 후 remove 써서 없애버리고 항상 0번째거만 뽑아도 됨
 			}
 			
 		}
@@ -121,7 +122,6 @@ public class MySwing07 extends JFrame {
 		}
 		*/
 		
-		
 		lbl1.setText(lotto.get(0) + "");
 		lbl2.setText(lotto.get(1) + "");
 		lbl3.setText(lotto.get(2) + "");
@@ -129,5 +129,30 @@ public class MySwing07 extends JFrame {
 		lbl5.setText(lotto.get(4) + "");
 		lbl6.setText(lotto.get(5) + "");
 		
+	}
+	
+	public void lotto2() {
+		List<Integer> numbers = new ArrayList<Integer>();
+		List<Integer> lotto = new ArrayList<Integer>();
+		
+		for(int i = 1; i<=45; i++){
+			numbers.add(i);
+		}
+		
+		int rnd =0;
+		int temp = 0;
+		
+		for(int i = 0; i < 6; i++) {
+			rnd = (int)(Math.random()*numbers.size());
+			lotto.add(numbers.get(rnd));
+			numbers.remove(rnd);
+		}
+		
+		lbl1.setText(lotto.get(0) + "");
+		lbl2.setText(lotto.get(1) + "");
+		lbl3.setText(lotto.get(2) + "");
+		lbl4.setText(lotto.get(3) + "");
+		lbl5.setText(lotto.get(4) + "");
+		lbl6.setText(lotto.get(5) + "");
 	}
 }

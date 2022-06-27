@@ -102,11 +102,45 @@ public class MySwing08 extends JFrame {
 	}
 	
 	public void star2(int max) {
+		int start = Integer.parseInt(tf_start.getText());
 		String s = "";
-		for(int i = 0; i < max; i++) {
+		
+		//첫 시작 별 개수
+		for(int i = 0; i < start-1; i++) {
+			s += "*";
+		}
+		
+		//마지막 시작 별 개수
+		for(int i = 0; i < max-1; i++) {
 			s += "*";
 			ta.append(s + "\n");
-			System.out.print(s + "\n");
+//			System.out.print(s + "\n");
 		}
+	}
+	
+	//선생님 풀이
+	public void myclick() {
+		String a = tf_start.getText();
+		String b = tf_last.getText();
+		int aa = Integer.parseInt(a);
+		int bb = Integer.parseInt(b);
+		
+		String txt = "";
+		
+		for(int i = aa; i<=bb; i++) {
+			txt += getStart(i);
+		}
+		
+		ta.setText(txt);
+	}
+	
+	public String getStart(int cnt) {
+		String ret = "";
+		for(int i = 0; i < cnt; i++) {
+			ret += "*";
+		}
+		ret += "\n";
+		
+		return ret;
 	}
 }

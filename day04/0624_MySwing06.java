@@ -1,6 +1,5 @@
 package day04;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -91,12 +90,13 @@ public class MySwing06 extends JFrame {
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				hap();
+				myClick();
 			}
 		});
 	}
 	
-	public void hap() {
+	//이 파일 안에서만 쓰겠다고 하면 private으로 해도 됨
+	public void myClick() {
 		int start = Integer.parseInt(tf1.getText());
 		int end = Integer.parseInt(tf2.getText());
 		int num = Integer.parseInt(tf3.getText());

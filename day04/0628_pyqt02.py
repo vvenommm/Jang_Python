@@ -17,17 +17,9 @@ class MainClass(QMainWindow, form_class):
         # 화면을 보여준다.
         self.show()
         
-        
     def myclick(self):
         a = int(self.le.text())+100
         self.le.setText("{}".format(a))
-        
-        # pass
-        #_translate = QtCore.QCoreApplication.translate
-        # if(self.label.)
-        #self.label.setText(_translate("MainWindow", "Good Night"))
-        
-        
         
 if __name__ == "__main__" :
     app = QApplication(sys.argv) 

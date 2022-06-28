@@ -17,6 +17,10 @@ class MainClass(QMainWindow, form_class):
         # 화면을 보여준다.
         self.show()
         
+        '''
+        text()는 C++에서 온 문법.
+        '''
+        
     def myclick(self):
         a = int(self.le.text())
         b = int(self.le2.text())

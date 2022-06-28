@@ -25,6 +25,15 @@ class MainClass(QMainWindow, form_class):
         for i in range(1, 9+1):
             str = "{} * {} = {}".format(dan, i, (dan*i))
             self.te.append(str) #te에 출력하기
+            
+    #쌤 답
+    def myclick2(self):
+        dan = int(self.le.text()) #몇 단 출력할것인가
+        str = "";
+        
+        for i in range(1, 9+1):
+            str += "{} * {} = {}".format(dan, i, (dan*i))
+            self.te.setText(str) #te에 출력하기
         
         
 if __name__ == "__main__" :

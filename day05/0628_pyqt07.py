@@ -15,7 +15,8 @@ class MainClass(QMainWindow, form_class):
         self.setupUi(self)
         # 버튼과 연결하기
         # self.pb.clicked.connect(self.myclick)
-        self.pb.clicked.connect(self.myclick2)
+        # self.pb.clicked.connect(self.myclick2)
+        self.pb.clicked.connect(self.myclick3)
         
         # enter 치면 작동하는 이벤트 주기
         # lineEdit_search 이랑 Enter Key랑 Mapping
@@ -43,7 +44,7 @@ class MainClass(QMainWindow, form_class):
         self.lbl5.setText(str(arr[4]))
         self.lbl6.setText(str(arr[5]))
             
-    #쌤 답
+    #쌤 답 1
     def myclick2(self):
        #myRandom 1 방법으로
        
@@ -67,7 +68,25 @@ class MainClass(QMainWindow, form_class):
         self.lbl4.setText(str(arr45[3]))
         self.lbl5.setText(str(arr45[4]))
         self.lbl6.setText(str(arr45[5]))
+    
+    #쌤 답 2
+    def myclick3(self):
+        #myRandom 3 방법으로
         
+        arr45 = list(range(1, 45+1))
+        arr6 = []
+       
+        for i in range(6):
+            rnd = int(random()*len(arr45))
+            a = arr45.pop(rnd)
+            arr6.append(a)
+        self.lbl1.setText(str(arr6[0]))
+        self.lbl2.setText(str(arr6[1]))
+        self.lbl3.setText(str(arr6[2]))
+        self.lbl4.setText(str(arr6[3]))
+        self.lbl5.setText(str(arr6[4]))
+        self.lbl6.setText(str(arr6[5]))
+       
 if __name__ == "__main__" :
     app = QApplication(sys.argv) 
     window = MainClass() 

@@ -45,12 +45,12 @@ class MainClass(QMainWindow, form_class):
         if(self.flag):
             btn = self.sender()
             btn.setIcon(QtGui.QIcon('1.png'))
-            self.flag = False;
+            # self.flag = False;
         else :
             self.sender().setIcon(QtGui.QIcon('2.png'))
-            self.flag = True;
-            
+            # self.flag = True;
         
+        self.flag = not self.flag
         
         
 if __name__ == "__main__" :

@@ -59,8 +59,19 @@ class MainClass(QMainWindow, form_class):
         # 이건 2차원 배열에서 하나 찍기
         # self.pb2D[1][2].setIcon(QtGui.QIcon('1.png'))
         
+        '''
+            이벤트란?
+            언제 발생할지 모르는 어떠한 일이 생기기 전까지 대기
+        '''
         
-        pass
+        for i in range(10):
+            for j in range(10):
+                if self.arr2D[i][j] == 0:
+                    self.pb2D[i][j].setIcon(QtGui.QIcon('0.png'))
+                elif self.arr2D[i][j] == 1:
+                    self.pb2D[i][j].setIcon(QtGui.QIcon('1.png'))
+                elif self.arr2D[i][j] == 2:
+                    self.pb2D[i][j].setIcon(QtGui.QIcon('2.png'))
     
     def myclick(self):
         pass

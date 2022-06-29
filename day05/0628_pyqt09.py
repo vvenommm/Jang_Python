@@ -2,6 +2,7 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from random import random
+from PyQt5.Qt import QMessageBox
 
 # UI파일 연결
 # UI파일 위치를 잘 적어 넣어준다.
@@ -14,6 +15,7 @@ class MainClass(QMainWindow, form_class):
         # 연결한 Ui를 준비한다.
         self.setupUi(self)
         # 버튼과 연결하기
+        '''
         self.pb11.clicked.connect(self.myclick)
         self.pb0.clicked.connect(self.clickpb0)
         self.pb1.clicked.connect(self.clickpb1)
@@ -25,7 +27,19 @@ class MainClass(QMainWindow, form_class):
         self.pb7.clicked.connect(self.clickpb7)
         self.pb8.clicked.connect(self.clickpb8)
         self.pb9.clicked.connect(self.clickpb9)
-        # self.pb.clicked.connect(self.myclick2)
+        '''
+        
+        self.pb11.clicked.connect(self.mycall)
+        self.pb0.clicked.connect(self.myclick2)
+        self.pb1.clicked.connect(self.myclick2)
+        self.pb2.clicked.connect(self.myclick2)
+        self.pb3.clicked.connect(self.myclick2)
+        self.pb4.clicked.connect(self.myclick2)
+        self.pb5.clicked.connect(self.myclick2)
+        self.pb6.clicked.connect(self.myclick2)
+        self.pb7.clicked.connect(self.myclick2)
+        self.pb8.clicked.connect(self.myclick2)
+        self.pb9.clicked.connect(self.myclick2)
         
         # enter 치면 작동하는 이벤트 주기
         # lineEdit_search 이랑 Enter Key랑 Mapping
@@ -92,6 +106,13 @@ class MainClass(QMainWindow, form_class):
     
     #쌤 답
     def myclick2(self):
+        str_new = self.sender().text()
+        str_old = self.le.text()
+        self.le.setText(str_old + str_new)
+    
+    def mycall(self):
+        str_tel = self.le.text()
+        QMessageBox.about(self, 'Calling', str_tel)
         pass
         
 if __name__ == "__main__" :

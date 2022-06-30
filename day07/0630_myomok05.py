@@ -1,11 +1,11 @@
 import sys
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.Qt import QPushButton, QSize
+from PyQt5.Qt import QPushButton, QSize, QMessageBox
 from sqlalchemy.sql.expression import except_
 # UI파일 연결
 # UI파일 위치를 잘 적어 넣어준다.
-form_class = uic.loadUiType("myomok04.ui")[0]
+form_class = uic.loadUiType("myomok05.ui")[0]
 
 # 프로그램 메인을 담당하는 Class 선언
 class MainClass(QMainWindow, form_class):
@@ -15,6 +15,8 @@ class MainClass(QMainWindow, form_class):
         self.setupUi(self)
         #흑백 번갈아하게 해줄 불린
         self.flagWB = True;
+        #게임 진행 상태를 나타내는 불린
+        self.flagIng = True;
         #렌더링
         self.arr2D = [
             [0,0,0,0,0,0,0,0,0,0,],
@@ -51,12 +53,25 @@ class MainClass(QMainWindow, form_class):
             # line 배열을 pbs 배열에 넣기
             self.pb2D.append(line)
         
+        #reset 버튼 연결하기
+        self.pb.clicked.connect(self.myreset)
+        
         #돌 놓기
         self.myrender();
         
         # 화면을 보여준다.
         self.show()
+    
+    def myreset(self):
+        self.flagIng = not self.flagIng
+        self.flagWB = not self.flagWB
         
+        for i in range(10):
+            for j in range(10):
+                self.pb2D[i][j].setIcon(QtGui.QIcon('0.png'))
+                self.arr2D[i][j] = 0;
+        
+    
     def myrender(self):
         # 이건 1차원 배열 -> 우린 2차원 배열로 해서 넣을 것
         # self.pbs[5].setIcon(QtGui.QIcon('1.png'))
@@ -79,6 +94,10 @@ class MainClass(QMainWindow, form_class):
                     self.pb2D[i][j].setIcon(QtGui.QIcon('2.png'))
     
     def myclick(self):
+        if (not self.flagIng) :
+            QMessageBox.about(self, '오목', "게임이 종료되었습니다.\n다시 시작해주세요.")
+            return;
+    
         str_ij = self.sender().toolTip()
         
         arr_ij = str_ij.split(",")
@@ -120,8 +139,21 @@ class MainClass(QMainWindow, form_class):
         
         print("\n===============\n")
         
+        d1 = dl+ur+1
+        d2 = le+ri+1
+        d3 = ul+dr+1
+        d4 = up+dw+1
+        
         self.myrender()
+
+        if(d1 == 5 or d2 == 5 or d3 == 5 or d4 == 5):
+            if self.flagWB:
+                QMessageBox.about(self, '오목', "흑돌 승!")
+            else :
+                QMessageBox.about(self, '오목', "백돌 승!")
             
+            self.flagIng = not self.flagIng
+
     def checkUP(self, i, j, stone):
         cnt = 0;
         
@@ -285,9 +317,7 @@ class MainClass(QMainWindow, form_class):
                     return cnt;
         except:
             return cnt;
-        QMessageBox.about(self, 'Calling', str_tel)
-    
-    
+        
 if __name__ == "__main__" :
     app = QApplication(sys.argv) 
     window = MainClass() 

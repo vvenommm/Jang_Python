@@ -2,7 +2,7 @@ import sys
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.Qt import QPushButton, QSize, QMessageBox
-from sqlalchemy.sql.expression import except_
+
 # UI파일 연결
 # UI파일 위치를 잘 적어 넣어준다.
 form_class = uic.loadUiType("myomok05.ui")[0]

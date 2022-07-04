@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forward.html</title>
+</head>
+<body>
+<h2>You are on Forward.html :D</h2><br />
+
+<br><hr><br>
+
+<h3>매개변수 1개 받아오기</h3>
+{{a}}<br>
+
+<br><hr><br>
+
+<h3>매개변수 배열 받아오기</h3>
+{{b}}<br>
+
+<br><hr><br>
+
+<h3>매개변수 배열 받아서 출력</h3>
+{% for i in b %}
+{{i}}<br>
+{% endfor %}
+
+<br>
+<br><hr><br>
+<br>
+
+<h3>매개변수 2차 배열 받아서 테이블로 출력</h3><br>
+<table border="1">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for i in c %}
+		<tr>
+			<td>{{i.e_id}}</td>
+			<td>{{i.e_name}}</td>
+			<td>{{i.sex}}</td>
+			<td>{{i.addr}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+
+
+</body>
+</html>

@@ -31,6 +31,12 @@ class MemDao:
         self.conn.commit()
         return cnt
     
+    def memDelete(self, m_id):
+        sql = f"delete from mem where m_id = '{m_id}'"
+        cnt = self.curs.execute(sql)
+        self.conn.commit()
+        return cnt
+    
     def __del__(self):
         self.curs.close();
         self.conn.close();

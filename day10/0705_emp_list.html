@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EMP_LIST</title>
+<script type="text/javascript">
+	function emp_ins(){
+		location.href="emp_ins";
+	}
+</script>
+</head>
+<body>
+<h3>emp_list</h3>
+<table border="1">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for e in list %}
+		<tr>
+			<td><a href="emp_detail?e_id={{e.E_ID}}">{{e.E_ID}}</a></td>
+			<td>{{e.E_NAME}}</td>
+			<td>{{e.SEX}}</td>
+			<td>{{e.ADDR}}</td>
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="4"><input type="button" value="추가" onclick="emp_ins()"/></td>
+		</tr>
+	</tbody>
+</table>
+
+</body>
+</html>

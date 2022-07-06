@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EMP_LIST</title>
+<script src="static/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	var e_id = document.getElementById('eId');
+	var e_name = document.getElementById('eName');
+	var e_sex = document.getElementById('eSex');
+	var e_addr = document.getElementById('eAddr');
+				
+	function myclick(){
+		var params = {
+				e_id : '1'
+		}
+		
+		$.ajax({
+			type : "GET",
+			url : "emp_list.ajax",
+			success : function(res) {
+				var emps = res.list;
+				
+				str = "";
+				for(i=0; i<emps.length; i++){
+					str += '<tr>';
+					str += '<td id="'+emps[i].E_ID+'" onclick="emp_detail(this.id)">' + emps[i].E_ID + '</td>';
+					str += '<td>' + emps[i].E_NAME + '</td>';
+					str += '<td>' + emps[i].SEX + '</td>';
+					str += '<td>' + emps[i].ADDR + '</td></tr>';
+// 					alert(emps[i].ADDR)
+				}
+				
+				$('#mytbody').html("");
+				$('#mytbody').html(str);
+				console.log(res);
+			}
+		});
+	}
+	
+	function emp_detail(id){
+		
+		var params = {
+				e_id : id
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_detail.ajax",
+			data : params,
+			success : function(res) {
+				var emp = res.emp;
+				console.log(emp);
+				
+				id = `${emp[0].e_id}`
+				name = `${emp[0].e_name}`
+				sex = `${emp[0].sex}`
+				addr = `${emp[0].addr}`
+				
+				e_id.value = id;
+				e_name.value = name;
+				e_sex.value = sex;
+				e_addr.value = addr;
+// 				e_id.textContent = id;
+// 				$('#d1').html("");
+// 				$('#d1').html(str);
+// 				console.log(res);
+			}
+		});
+		
+	}
+	
+	function empMod(){
+		var newName = e_name.value;
+		var newAddr = e_addr.value;
+		
+		var params = {
+				e_id : e_id,
+				e_name : newName,
+				addr : newAddr
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_upd.ajax",
+			data : params,
+			success : function(res) {
+				alert("업뎃 성공")
+			
+			}
+		});
+	}
+	
+	function empAdd(){
+		
+		var newName = e_name.value;
+		var newSex = e_sex.value;
+		var newAddr = e_addr.value;
+		
+		var params = {
+				e_name : newName,
+				sex : newSex,
+				addr : newAddr
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_add.ajax",
+			data : params,
+			success : function(res) {
+				alert("추가 성공")
+			
+			}
+		});
+		
+	}
+	
+	function empDel(){
+		
+	}
+</script>
+<style type="text/css">
+	table{
+		border: transparent;
+	}
+	th, td{
+		border: 2px solid green;
+		text-align: center;
+	}
+	
+	td:hover{
+		background: yellow;
+	}
+	
+	tbody tr:hover{
+		background: pink;
+	}
+</style>
+</head>
+<body>
+<a href="javascript:myclick()"><button>회원 정보 확인</button></a>
+
+<br><br>
+
+<table border="1" style="float:left;">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="mytbody">
+		<tr>
+			<td colspan="4">데이터 없음 </td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1" style="float:right;">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="empOne">
+		<tr>
+			<td>사번</td>
+			<td colspan="3"><input type="text" name="id" id='eId' readonly></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td colspan="3"><input type="text" name="name" id='eName'></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td colspan="3"><input type="text" name="sex" id='eSex'></td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td colspan="3"><input type="text" name="addr" id='eAddr'></td>
+		</tr>
+	</tbody>
+</table>
+
+<br><br style="clear:both;">
+
+<div style="float:right;">
+<input type="button" value="수정" onclick="empMod()">
+<input type="button" value="추가" onclick="empAdd()">
+<input type="button" value="삭제" onclick="empDel()">
+</div>
+
+</body>
+</html>

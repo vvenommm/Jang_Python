@@ -52,6 +52,3 @@ def emp_ins_act(request):
         ed = EmpDao()
         cnt = ed.myinsert( e_name, sex, addr)
         return render(request, 'emp_ins_act.html', {'cnt' : cnt})
-    
-    
-    

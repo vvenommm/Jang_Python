@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EMP_LIST</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	function myclick(){
+		axios.get('emp_list.axios')
+		.then(response => {
+			
+			var list = response.data.list;
+			str = "";
+			
+			for(i = 0; i < list.length; i++){
+				id = list[i].E_ID; 
+				name = list[i].E_NAME; 
+				sex = list[i].SEX; 
+				addr = list[i].ADDR; 
+				
+				str += `
+					<tr>
+						<td><a href="javascript:emp_detail('${id}')">${id}</a></td>
+						<td>${name}</td>
+						<td>${sex}</td>
+						<td>${addr}</td>
+					</tr>
+				`;
+			}
+			document.querySelector("#mytbody").innerHTML = str;
+		});
+	}
+	
+	function emp_detail(id){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+					
+		axios('emp_detail.axios', {
+			method : "get",
+			params:{
+				e_id : id,
+			},
+		})
+		.then(response => {
+			
+			console.log(response.data);
+			var emp = response.data.emp;
+			str = "";
+			
+			id = emp[0].e_id;
+			name = emp[0].e_name; 
+			sex = emp[0].sex; 
+			addr = emp[0].addr; 
+			
+// 			console.log(id + name + sex + addr);
+// 			alert(e_id);
+			e_id.value = id;
+			e_name.value = name;
+			e_sex.value = sex;
+			e_addr.value = addr;
+// 			e_id.textContent = id;
+				
+				
+// 				str += `
+// 					<tr>
+// 						<td><a href="javascript:emp_detail('${id}')">${id}</a></td>
+// 						<td>${name}</td>
+// 						<td>${sex}</td>
+// 						<td>${addr}</td>
+// 					</tr>
+// 				`;
+// 			document.querySelector("#mytbody").innerHTML = str;
+		});
+	}
+	
+	function empMod(){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+					
+		var newName = e_name.value;
+		var newAddr = e_addr.value;
+		var id = e_id.value;
+		
+		console.log(newName + " " + newAddr + " " + id);
+		
+// 		var params = {
+// 				e_id : e_id,
+// 				e_name : newName,
+// 				addr : newAddr
+// 		}
+		
+		axios.get('emp_upd.axios', {
+			method : "get",
+			params:{
+				e_id : id,
+				e_name : newName,
+				addr : newAddr,
+			},
+		})
+		.then(response => {
+			var cnt = response.data.cnt
+			
+			if(cnt == 1){
+				alert("수정 성공");
+				e_id.value = "";
+				e_name.value = "";
+				e_sex.value = "";
+				e_addr.value = "";
+				myclick();
+			}else{
+				alert("수정 실패")
+			}
+		})
+	}
+	
+	function empAdd(){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+		
+		var newName = e_name.value;
+		var newSex = e_sex.value;
+		var newAddr = e_addr.value;
+		
+		console.log("새 이름 : " + newName);
+		
+		const params = new URLSearchParams();
+		params.append('e_name', newName);
+		params.append('sex', newSex);
+		params.append('addr', newAddr);
+		
+// 		axios.post('emp_add.axios', {e_name : newName, 'sex' : newSex, 'addr' : newAddr})
+		axios.post('emp_add.axios', params)
+		.then(res => {
+			var cnt = res.data.cnt;
+			
+			if(cnt == 1){
+				alert("추가 성공!");
+				e_id.value = "";
+				e_name.value = "";
+				e_sex.value = "";
+				e_addr.value = "";
+				myclick();
+			}else{
+				alert("추가 실패!");
+			}
+		})
+	}
+	
+	function empDel(){
+		
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+		
+		var id = e_id.value;
+		
+		var text = "정말 삭제?";
+		
+		if(confirm(text)){
+			
+			const params = new URLSearchParams();
+			params.append('e_id', id);
+			
+			axios.post('emp_del.axios', params)
+			.then(res => {
+				var cnt = res.data.cnt;
+				
+				if(cnt == 1){
+					alert("삭제 성공!");
+					e_id.value = "";
+					e_name.value = "";
+					e_sex.value = "";
+					e_addr.value = "";
+					myclick();
+				}else{
+					alert("삭제 실패!");
+				}
+			})
+		}
+	}
+</script>
+<style type="text/css">
+	table{
+		border: transparent;
+	}
+	th, td{
+		border: 2px solid green;
+		text-align: center;
+	}
+	
+	td:hover{
+		background: yellow;
+	}
+	
+	tbody tr:hover{
+		background: pink;
+	}
+</style>
+</head>
+<body>
+<a href="javascript:myclick()"><button>회원 정보 확인</button></a>
+
+<br><br>
+
+<table border="1" style="float:left;">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="mytbody">
+		<tr>
+			<td colspan="4">데이터 없음 </td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1" style="float:right;">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="empOne">
+		<tr>
+			<td>사번</td>
+			<td colspan="3"><input type="text" name="id" id='eId' readonly></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td colspan="3"><input type="text" name="name" id='eName'></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td colspan="3"><input type="text" name="sex" id='eSex'></td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td colspan="3"><input type="text" name="addr" id='eAddr'></td>
+		</tr>
+	</tbody>
+</table>
+
+<br><br style="clear:both;">
+
+<div style="float:right;">
+<input type="button" value="수정" onclick="empMod()">
+<input type="button" value="추가" onclick="empAdd()">
+<input type="button" value="삭제" onclick="empDel()">
+</div>
+
+</body>
+</html>

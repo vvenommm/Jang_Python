@@ -1,0 +1,9 @@
+Humann = require('./humann.js')
+
+var a = new Animall();
+console.log(a.age);
+a.aging();
+console.log(a.age);
+
+var h = new Humann();
+console.log(h);

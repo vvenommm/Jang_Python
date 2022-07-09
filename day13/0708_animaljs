@@ -1,0 +1,14 @@
+class Animal{
+	constructor(){
+		console.log('constructor 실행');
+		this.age = 1;
+	}
+	
+	//메소드
+	aging(){
+		this.age++;
+		return this.age;
+	}
+}
+
+export default Animal;

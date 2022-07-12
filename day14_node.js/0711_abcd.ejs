@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>abcd.ejs</title>
+</head>
+<body>
+	<h1>you are on abcd.ejs</h1>
+	변수 1개 : <%= a; %><br><hr>
+	배열 : <%= b.join(" / "); %><br><hr>
+	2차원 배열 : 
+	
+	<table border="1">
+		<tr>
+			<th>id</th>
+			<th>name</th>
+			<th>sex</th>
+			<th>addr</th>
+		</tr>
+		<% for(var i = 0; i < c.length; i++){ %>
+		<tr>
+			<td>
+				<%=c[i].e_id;%>
+			</td>
+			<td>
+				<%=c[i].e_name;%>
+			</td>
+			<td>
+				<%=c[i].sex;%>
+			</td>
+			<td>
+				<%=c[i].addr;%>
+			</td>
+		</tr>	
+		<%}%>
+	</table>
+</body>
+</html>

@@ -29,7 +29,13 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/ejs', (req, res) => {
-  res.render('abcd');
+	a = "홍길동"
+	b = ["홍길동", "전우치", "이순신"]
+	c = [
+		{'e_id' : '1', 'e_name' : '1', 'sex' : '1', 'addr' : '1'},
+		{'e_id' : '2', 'e_name' : '2', 'sex' : '2', 'addr' : '2'}
+	]
+	res.render('abcd', {a : a, b:b, c:c});
 })
 	
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

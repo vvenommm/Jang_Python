@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>abcd.ejs</title>
+<style type="text/css">
+th, td {
+	text-align: center;
+	width: 70px;
+	height: 28px;
+}
+</style>
+<script type="text/javascript">
+function fn_list(){
+	location.href = "emp_list";
+}
+function fn_mod(){
+	location.href = "emp_mod?e_id=<%=emp.e_id%>";
+}
+function fn_del(){
+	if(confirm("정말 삭제?")){
+		location.href = "emp_del_act?e_id=<%=emp.e_id%>";
+	}
+}
+</script>
+</head>
+<body>
+	<h1>you are on emp_list.ejs now</h1>
+	
+	<table border="1" style="border : 2px solid pink; border-collapse: collapse;">
+		<tr>
+			<th>사번</th>
+			<td><%=emp.e_id%></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><%=emp.e_name%></td>
+		</tr>
+		<tr>
+			<th>성별</th>
+			<td><%=emp.sex%></td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td><%=emp.addr%></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button onclick="fn_list()">목록</button>
+				<button onclick="fn_mod()">수정</button>
+				<button onclick="fn_del()">삭제</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

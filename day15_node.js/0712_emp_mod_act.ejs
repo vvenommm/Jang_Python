@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>abcd.ejs</title>
+<script type="text/javascript">
+var cnt = <%=cnt%>;
+if(cnt == 1){
+	alert("정상적으로 수정 완");
+	location.href = "emp_list";
+}else{
+	history.back();
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

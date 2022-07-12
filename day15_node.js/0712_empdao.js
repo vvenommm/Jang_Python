@@ -20,7 +20,25 @@ class EmpDao{
 	select(id){
 		var sql = `select e_id, e_name, sex, addr from emp where e_id = '${id}'`;
 		let result = this.connection.query(sql);
-		return result;
+		return result[0];
+	}
+	
+	insert(e_name, sex, addr){
+		var sql = `insert into emp (e_name, sex, addr) values('${e_name}', '${sex}', '${addr}')`;
+		let result = this.connection.query(sql);
+		return result.affectedRows;
+	}
+	
+	update(e_id, e_name, addr){
+		var sql = `update emp set e_name = '${e_name}', addr = '${addr}' where e_id = '${e_id}'`;
+		let result = this.connection.query(sql);
+		return result.affectedRows;
+	}
+	
+	delete(e_id){
+		var sql = `delete from emp where e_id = '${e_id}'`;
+		let result = this.connection.query(sql);
+		return result.affectedRows;
 	}
 }
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>abcd.ejs</title>
+<style type="text/css">
+th, td {
+	text-align: center;
+	width: 70px;
+	height: 28px;
+}
+</style>
+</head>
+<body>
+	<h1>you are on emp_list.ejs now</h1>
+	<form action="emp_mod_act" method="post">
+		<table border="1" style="border : 2px solid pink; border-collapse: collapse;">
+			<tr>
+				<th>사번</th>
+				<td><input type="text" name="e_id" value="<%=emp.e_id%>" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="e_name" value="<%=emp.e_name%>"></td>
+			</tr>
+			<tr>
+				<th>성별</th>
+				<td><input type="text" name="sex" value="<%=emp.sex%>" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input type="text" name="addr" value="<%=emp.addr%>"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="실행" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

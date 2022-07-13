@@ -7,10 +7,12 @@ const port = 3300;
 const http = require('http');
 const ejs = require('ejs');
 const server = http.createServer(app);
+const path = require('path');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
+app.use('/static', express.static(path.join(__dirname, '/static')));
 
 app.get('/', (req, res) => res.send("Hello World!"))
 
@@ -37,6 +39,16 @@ app.get('/ejs', (req, res) => {
 	]
 	res.render('abcd', {a : a, b:b, c:c});
 })
+
+app.get('/ajax', (req, res) => {
+	res.render("ajax");
+})
+
+app.post('/emp_list.ajax', (req, res) => {
+	var myJson = {'result' : 'OK', 'babo' : '바보'};
+	res.json(myJson);
+})
+
 	
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

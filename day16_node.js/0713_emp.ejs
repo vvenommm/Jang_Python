@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<title>abcd.ejs</title>
+<style type="text/css">
+a, a:hover, a:visited {
+	text-decoration: none;
+	color : black;
+}
+td {
+	text-align: center;
+	width: 70px;
+	height: 28px;
+}
+</style>
+<script type="text/javascript">
+
+	function fn_list(){
+// 		var params ={
+// 			e_id : '1'
+// 		};
+		$.ajax({
+			type : "POST",
+			url : "emp_list.ajax",
+// 			data : params,
+			success : function(res){
+				var list = res.list;
+				var str = "";
+				
+				for(i = 0; i < list.length; i++){
+					id = list[i].e_id; 
+					name = list[i].e_name; 
+					sex = list[i].sex; 
+					addr = list[i].addr; 
+					
+					str += `
+						<tr>
+							<td><a href="javascript:fn_detail('${id}')">${id}</a></td>
+							<td>${name}</td>
+							<td>${sex}</td>
+							<td>${addr}</td>
+						</tr>
+					`;
+				}
+				$('#mytbody').html(str);
+				console.log(res);
+			}
+		})
+	}
+	
+	function fn_detail(e_id){
+		var params ={
+			e_id : e_id
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_detail.ajax",
+			data : params,
+			success : function(res){
+				var emp = res.emp;
+				$('#eId').val(emp.e_id);
+				$('#eName').val(emp.e_name);
+				$('#eSex').val(emp.sex);
+				$('#eAddr').val(emp.addr);
+			}
+		
+		})
+	}
+	
+	function fn_update(){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+
+		if(e_id.value != ""){
+				
+			var params ={
+				e_id : e_id.value,
+				e_name : e_name.value,
+				addr : e_addr.value
+			};
+			
+			$.ajax({
+				type : "POST",
+				url : "emp_update.ajax",
+				data : params,
+				success : function(res){
+					
+					if(res.cnt == 1){
+						alert("수정 성공");
+						e_id.value = "";
+						e_name.value = "";
+						e_sex.value = "";
+						e_addr.value = "";
+						
+						fn_list();
+					}else{
+						alert("수정 실패")
+					}
+				}
+			
+			})
+		}else{
+			alert('사번을 먼저 선택해주세요.');
+		}
+	}
+	
+	function fn_insert(){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+
+				
+		var params ={
+			e_name : e_name.value,
+			e_sex : e_sex.value,
+			addr : e_addr.value
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_insert.ajax",
+			data : params,
+			success : function(res){
+				
+				if(res.cnt == 1){
+					alert("추가 성공");
+					e_id.value = "";
+					e_name.value = "";
+					e_sex.value = "";
+					e_addr.value = "";
+					
+					fn_list();
+				}else{
+					alert("추가 실패")
+				}
+			}
+		
+		})
+	}
+	
+	function fn_delete(){
+		var e_id = document.getElementById('eId');
+		var e_name = document.getElementById('eName');
+		var e_sex = document.getElementById('eSex');
+		var e_addr = document.getElementById('eAddr');
+
+				
+		var params ={
+			e_id : e_id.value
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : "emp_delete.ajax",
+			data : params,
+			success : function(res){
+				
+				if(res.cnt == 1){
+					alert("삭제 성공");
+					e_id.value = "";
+					e_name.value = "";
+					e_sex.value = "";
+					e_addr.value = "";
+					
+					fn_list();
+				}else{
+					alert("삭제 실패")
+				}
+			}
+		
+		})
+		
+	}
+	
+</script>
+</head>
+<body onload="fn_list()">
+	<h1>you are on emp.ejs now</h1>
+	
+	<table border="1" style="border : 2px solid pink; border-collapse: collapse; width: 300px; float:left;">
+		<thead>
+			<tr>
+				<th>사번</th>
+				<th>이름</th>
+				<th>성별</th>
+				<th>주소</th>
+			</tr>
+		</thead>
+		<tbody id="mytbody">
+			<tr>
+				<td colspan="4">데이터가 없습니다.</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<table border="1" style="float:right;">
+	<thead>
+		<tr>
+			<th>사번</th>
+			<th>이름</th>
+			<th>성별</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody id="empOne">
+		<tr>
+			<td>사번</td>
+			<td colspan="3"><input type="text" name="id" id='eId' readonly></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td colspan="3"><input type="text" name="name" id='eName'></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td colspan="3"><input type="text" name="sex" id='eSex'></td>
+		</tr>
+		<tr>
+			<td>주소</td>
+			<td colspan="3"><input type="text" name="addr" id='eAddr'></td>
+		</tr>
+	</tbody>
+</table>
+	<button class="btn" onclick="fn_update()">수정</button>
+	<button class="btn" onclick="fn_insert()">추가</button>
+	<button class="btn" onclick="fn_delete()">삭제</button>
+</body>
+</html>
